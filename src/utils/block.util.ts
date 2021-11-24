@@ -1,3 +1,5 @@
+import hexToBinary from 'hex-to-binary';
+
 import { GENESIS_DATA, MINE_RATE } from 'const/config';
 
 import { cryptoHash } from './cryptoHash.util';
@@ -59,7 +61,9 @@ class Block {
 			timestamp = Date.now();
 			difficulty = Block.adjustDifficulty({ originalBlock: lastBlock, timestamp });
 			hash = cryptoHash(timestamp, prevHash, data, difficulty, nonce);
-		} while (hash.substring(0, difficulty) !== '0'.repeat(difficulty));
+		} while (
+			hexToBinary(hash).substring(0, difficulty) !== '0'.repeat(difficulty)
+		);
 
 		return new this({
 			timestamp,

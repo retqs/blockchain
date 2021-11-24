@@ -30,8 +30,8 @@ class Blockchain {
 
 		for (let i = 1; i < chain.length; i++) {
 			const { data, timestamp, prevHash, hash, nonce, difficulty } = chain[i];
-
 			const currentLashHash = chain[i - 1].hash;
+			const lastDifficulty = chain[i - 1].difficulty;
 
 			if (prevHash !== currentLashHash) return false;
 
@@ -44,6 +44,8 @@ class Blockchain {
 			);
 
 			if (hash !== validatedHash) return false;
+
+			if (Math.abs(lastDifficulty - difficulty) > 1) return false;
 		}
 
 		return true;
