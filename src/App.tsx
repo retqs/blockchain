@@ -11,7 +11,7 @@ console.log(blockchain.chain, 'after');
 
 const isValid = Blockchain.isValidChain(blockchain.chain);
 console.log(isValid, 'yes im pretty valid');
-
+console.log(minedBlock, 'genesis');
 function App() {
 	return (
 		<div className='App'>
